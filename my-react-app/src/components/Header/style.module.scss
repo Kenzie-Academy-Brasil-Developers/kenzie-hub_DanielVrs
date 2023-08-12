@@ -1,0 +1,19 @@
+.headerBox{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+	padding-top: 80px;
+	padding-bottom: clamp(19px, 10vw, 35px);
+
+	&>div{
+		
+		display: flex;
+		justify-content: space-between;
+
+		&>img{
+			width: clamp(101px, 20vw, 144px);
+			
+		}
+	}
+}

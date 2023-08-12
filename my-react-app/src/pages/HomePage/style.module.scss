@@ -1,0 +1,50 @@
+.dashflex{
+
+	header{
+		padding: 26px 16px ;
+		>div{
+			max-width: 900px;
+			width: 100%;
+
+			img{
+				width: 106px;
+			}
+			button{
+				max-width:  62px;
+				max-height: 32px;
+				font-size: 12.8px;
+			}
+		}
+	}
+
+	.containerUserInfo{
+		border-top: 1px solid var(--grey-3);
+		padding: 34px 16px;
+		
+		>div{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 10px;
+			margin: 0 auto;
+			max-width: 900px;
+			width: 100%;
+		}
+	}
+
+	.containerPending{
+		border-top: 1px solid var(--grey-3);
+		padding: 24px 16px;
+
+		>div{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 24px;
+			margin: 0 auto;
+			max-width: 900px;
+			width: 100%;
+		}
+	}
+
+}
+

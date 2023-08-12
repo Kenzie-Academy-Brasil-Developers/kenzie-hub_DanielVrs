@@ -1,0 +1,128 @@
+.title1{
+	font-family: var(--font-family-primary);
+	font-weight: 700;
+	font-size: 1.125rem; //18px
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+}
+
+.title2{
+	font-family: var(--font-family-primary);
+	font-weight: 700;
+	font-size: clamp(14.4px, 3vw , 18px);
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+}
+
+.headline{
+	font-family: var(--font-family-primary);
+	font-weight: 400;
+	font-size: clamp(14.4px, 3vw , 18px);
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+}
+
+.headlineFixed{
+	font-family: var(--font-family-primary);
+	font-weight: 400;
+	font-size: 12px;
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+}
+
+.headlineBoldFixed{
+	font-family: var(--font-family-primary);
+	font-weight: 700;
+	font-size: 18px;
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+}
+
+.headlineBold{
+	font-family: var(--font-family-primary);
+	font-weight: 400;
+	font-size: clamp(9.7px, 2vw, 12.1px);
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+	&.red{
+		color: var(--negative);
+	}
+}
+
+.paragraph{
+	font-family: var(--font-family-primary);
+	font-weight: 400;
+	font-size: 1rem; //16px
+
+	&.white{
+		color: var(--grey-0);
+	}
+
+	&.grey{
+		color: var(--grey-1)
+	}
+
+	&.pink{
+		color: var(--color-primary)
+	}
+}

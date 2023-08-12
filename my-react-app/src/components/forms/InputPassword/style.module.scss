@@ -1,0 +1,17 @@
+.containerIpunt{
+	display: flex;
+	flex-direction: column;
+	gap: clamp(17px, 3vw, 22px);
+
+	width: 100%;
+
+  &>div{
+		position: relative;
+		
+		&>button{
+			position: absolute;
+			right: 10px;
+			top: clamp(28%, 2vw, 30%)
+		}
+	}
+}
