@@ -4,38 +4,23 @@ import { useForm } from "react-hook-form";
 import { InputPassword } from "../InputPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginFormSchema";
-import { api } from "../../../services/api";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { useContext, useState } from "react";
+import { RoutineUserContext } from "../../../providers/RoutineUserContext";
 
-export const LoginForm = ({setUser}) => {
-
-	const { register, handleSubmit, formState:{ errors } } = useForm({
-		resolver: zodResolver(loginFormSchema)
-	});
+export const LoginForm = () => {
 
 	const [loading, setLoading] = useState(false);
 
+	const {userLogin} = useContext(RoutineUserContext);
+
 	const navigate = useNavigate();
 
-	const userLogin = async (formData) => {
-		try {
-			setLoading(true);
-			const res = await api.post("/sessions",formData);
-			const token = res.data.token
-			setUser(res.data.user);
-			localStorage.setItem("@token-KenzieHub",token)
-			toast.success("Login realizado com sucesso!");
-			navigate("/dashboard")
-		} catch (error) {
-			toast.error("O e-mail e a senha não correspodem.");
-		}finally{
-			setLoading(false);
-		}
-	};
+	const { register, handleSubmit, reset, formState:{ errors } } = useForm({
+		resolver: zodResolver(loginFormSchema)
+	});
 
 	const submit = (formData) =>{
-		userLogin(formData);
+		userLogin(formData, reset, setLoading);
 	};
 
 	return(

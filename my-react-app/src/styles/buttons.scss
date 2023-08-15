@@ -5,12 +5,10 @@
 	gap: 10px; 
 	flex-shrink: 0;
 	
-	
 	font-family: var(--font-family-primary);
 	font-size: 1rem; //16px
 	font-weight: 500;
 
-	// width: clamp(260px, 6vw, 324px);
 	width: 100%;
 	height: clamp(38px, 6vw, 48px);
 	font-size: clamp(12.8px, 3vw, 16px);

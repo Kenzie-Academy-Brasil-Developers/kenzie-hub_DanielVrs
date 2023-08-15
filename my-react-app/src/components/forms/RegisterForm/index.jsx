@@ -1,49 +1,34 @@
-import { useNavigate } from "react-router-dom";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
 import { useForm } from "react-hook-form";
 import { zodResolver} from "@hookform/resolvers/zod";
-import { resgisterFormSchema } from "./registerFormSchema";
-import { api } from "../../../services/api";
-import { toast } from "react-toastify";
-import { useState } from "react";
+import { registerFormSchema } from "./registerFormSchema";
+import { RoutineUserContext } from "../../../providers/RoutineUserContext";
+import { useContext, useState } from "react";
+
 
 export const RegisterForm = () => {
 
-	const navigate = useNavigate();
-
-	const { register, handleSubmit, formState: { errors } } = useForm({
-		resolver: zodResolver(resgisterFormSchema)
-	});
-
 	const [loading, setLoading] = useState(false);
 
-	const userRegister = async (formData) => {
-		try {
-			setLoading(true)
-			await api.post("/users",formData);
-			 toast.success("Usuário criado com sucesso");
-			 navigate("/")
-		} catch (error) {
-			if(error.response.data.message === "Email already exists"){
-				toast.error("Usuário já cadastrado");
-			}
-		}finally{
-			setLoading(false);
-		}
-	};
+	const {userRegister} = useContext(RoutineUserContext);
+
+
+	const { register, handleSubmit, reset, formState: { errors } } = useForm({
+		resolver: zodResolver(registerFormSchema)
+	});
 
 	const submit = (formData) =>{
-		userRegister(formData);
-	}
+		userRegister(formData, reset, setLoading);
+	};
 
 	return(
 		<>
 			<form className="formBox" onSubmit={handleSubmit(submit)}>
 				<h2 className="title2 white">Crie sua conta</h2>
-				<span className="headlineBold grey" >Rapido e grátis, vamos nessa</span>
+				<span className="headlineBold grey" >Rápido e grátis, vamos nessa</span>
 
-				<Input label="Nome" type="texte" placeholder="Digite seu nome"  {...register("name")} error={errors.name} disabled={loading}/>
+				<Input label="Nome" type="text" placeholder="Digite seu nome"  {...register("name")} error={errors.name} disabled={loading}/>
 
 				<Input label="Email" type="email" placeholder="Digite seu email"  {...register("email")} error={errors.email} disabled={loading}/>
 
@@ -68,7 +53,7 @@ export const RegisterForm = () => {
 					{errors.course_module ? <p className="headlineBold red" >{errors.course_module.message}</p> : null }
 				</div>
 					<button className="btn lg brown" type="submit" disabled={loading}>
-						{loading ? "Cadastando..." : "Cadastrar"}
+						{loading ? "Cadastrando..." : "Cadastrar"}
 					</button >
 			</form>
 		</>

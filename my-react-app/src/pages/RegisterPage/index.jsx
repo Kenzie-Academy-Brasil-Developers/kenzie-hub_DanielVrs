@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 
 export const RegisterPage = () => {
 	return (
-		<div className={styles.headerflex}>
+		<div className={styles.headerFlex}>
 			<Header >
 				<Link className="btn sm grey" to="/">Voltar</Link>
 			</Header>

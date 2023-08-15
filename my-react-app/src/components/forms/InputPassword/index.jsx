@@ -7,7 +7,7 @@ export const InputPassword = forwardRef(({ error, label, ...rest }, ref) => {
 	const [isHidden, setIsHidden] = useState(true);
 	
 	return(
-		<div className={styles.containerIpunt}>
+		<div className={styles.containerInput}>
  			<label className="headline white" >{label}</label>
 			<div>
 				<input className="input" type={ isHidden ? "password" : "text" } ref={ref} {...rest}/>

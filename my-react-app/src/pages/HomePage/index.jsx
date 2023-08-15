@@ -1,10 +1,14 @@
+import { useContext } from "react";
 import { Header } from "../../components/Header";
+import { RoutineUserContext } from "../../providers/RoutineUserContext";
 import styles from "./style.module.scss";
 
-export const HomePage = ({ user, userLogout }) => {
+export const HomePage = () => {
+
+	const {user ,userLogout} = useContext(RoutineUserContext);
 
 	return (
-		<div className={styles.dashflex}>	
+		<div className={styles.dashFlex}>	
 			<Header>
 				<button className="btn sm grey" onClick={()=> userLogout()}>Sair</button>
 			</Header>
