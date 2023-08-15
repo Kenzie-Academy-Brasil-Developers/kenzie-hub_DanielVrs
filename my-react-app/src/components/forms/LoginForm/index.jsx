@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../Input";
 import { useForm } from "react-hook-form";
 import { InputPassword } from "../InputPassword";
@@ -35,7 +35,7 @@ export const LoginForm = () => {
 				<button className="btn lg pink" type="submit" disabled={loading}>{loading ? "Entrando..." : "Entrar"}</button>
 				
 				<p className="headlineBold grey">Ainda não possui uma conta?</p>
-				<button className="btn lg grey" onClick={() => navigate("/register")} type="button">Cadastre-se</button>
+				<Link to="/register" className="btn lg grey">Cadastre-se</Link>
 			</form>	
 		</div>
 		</>
