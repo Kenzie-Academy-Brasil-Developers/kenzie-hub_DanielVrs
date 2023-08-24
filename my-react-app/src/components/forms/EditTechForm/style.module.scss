@@ -1,0 +1,15 @@
+.formTech {
+  padding: 1rem 1rem 2rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: clamp(17px, 3vw, 22px);
+
+  .selectBox{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(17px, 3vw, 22px);
+
+	}
+}

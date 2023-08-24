@@ -1,0 +1,51 @@
+.modalOverlay{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,.5);
+
+  .modalBox{
+    position: relative;
+    width: 100%;
+    max-width: 325px;
+
+    background-color: var(--grey-3);
+
+    border-radius: 3.209px;
+    overflow: hidden;
+
+    .modalHeader{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--grey-2);
+      
+      height: 40px;
+
+      padding: 23px 1rem;
+
+    }
+
+    .closeButton{
+      color: var(--grey-1);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+  }
+
+
+}
+
+
+
+
+
+

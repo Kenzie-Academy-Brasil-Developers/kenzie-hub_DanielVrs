@@ -1,0 +1,27 @@
+.containerList{
+  display: flex;
+  flex-direction: column;
+
+  
+
+  >div{
+    display: flex;
+    justify-content: space-between;
+
+    >button{
+     max-width: 32px;
+     max-height: 32px;
+    }
+  }
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--grey-3);
+    border-radius: 4px;
+    width: 100%;
+    padding: 23px 26px;
+    gap: 10px;
+  }
+  
+}

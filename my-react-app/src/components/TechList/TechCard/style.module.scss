@@ -1,0 +1,36 @@
+.cardTech{
+  background-color: var(--grey-4) ;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 13px 23px;
+
+  border-radius: 4px;
+
+  .containerTexts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 15px;
+
+    @media(min-width: 410px){
+      flex-direction: row;
+      padding-right: 5px;
+    }
+  }
+
+  .containerButtons{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    align-self: self-end;
+
+    @media(min-width: 410px){
+    }
+  }
+}
