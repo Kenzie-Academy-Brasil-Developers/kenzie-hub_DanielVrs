@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Input } from "../Input";
 import { useForm } from "react-hook-form";
 import { InputPassword } from "../InputPassword";
@@ -8,36 +8,56 @@ import { useContext, useState } from "react";
 import { RoutineUserContext } from "../../../providers/RoutineUserContext";
 
 export const LoginForm = () => {
+  const [loading, setLoading] = useState(false);
 
-	const [loading, setLoading] = useState(false);
+  const { userLogin } = useContext(RoutineUserContext);
 
-	const {userLogin} = useContext(RoutineUserContext);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginFormSchema),
+  });
 
-	const navigate = useNavigate();
+  const submit = (formData, event) => {
+    event.preventDefault();
+    userLogin.mutate({ formData, reset, setLoading });
+  };
 
-	const { register, handleSubmit, reset, formState:{ errors } } = useForm({
-		resolver: zodResolver(loginFormSchema)
-	});
+  return (
+    <>
+      <div className="container">
+        <form className="formBox" onSubmit={handleSubmit(submit)}>
+          <h2 className="title2 white">Login</h2>
+          <Input
+            label="Email"
+            type="email"
+            placeholder="Digite seu E-mail"
+            {...register("email")}
+            error={errors.email}
+            disabled={loading}
+          />
 
-	const submit = (formData) =>{
-		userLogin(formData, reset, setLoading);
-	};
+          <InputPassword
+            label="Senha"
+            placeholder="Digite sua senha"
+            {...register("password")}
+            error={errors.password}
+            disabled={loading}
+          />
 
-	return(
-		<>
-		<div className="container">
-			<form className="formBox" onSubmit={handleSubmit(submit)}>
-				<h2 className="title2 white">Login</h2>
-				<Input label="Email" type="email" placeholder="Digite seu E-mail" {...register("email")} error={errors.email} disabled={loading}/>
+          <button className="btn lg pink" disabled={loading}>
+            {loading ? "Entrando..." : "Entrar"}
+          </button>
 
-				<InputPassword label="Senha"  placeholder="Digite sua senha" {...register("password")} error={errors.password} disabled={loading}/>
-
-				<button className="btn lg pink" type="submit" disabled={loading}>{loading ? "Entrando..." : "Entrar"}</button>
-				
-				<p className="headlineBold grey">Ainda não possui uma conta?</p>
-				<Link to="/register" className="btn lg grey">Cadastre-se</Link>
-			</form>	
-		</div>
-		</>
-	)
-}
+          <p className="headlineBold grey">Ainda não possui uma conta?</p>
+          <Link to="/register" className="btn lg grey">
+            Cadastre-se
+          </Link>
+        </form>
+      </div>
+    </>
+  );
+};

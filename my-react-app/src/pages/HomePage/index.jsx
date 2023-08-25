@@ -4,33 +4,33 @@ import { RoutineUserContext } from "../../providers/RoutineUserContext";
 import { TechList } from "../../components/TechList";
 import styles from "./style.module.scss";
 import { CreateTechModal } from "../../components/Modal/CreateTechModal";
-import {EditTechModal} from "../../components/Modal/EditTechModal";
+import { EditTechModal } from "../../components/Modal/EditTechModal";
 import { RoutineTechContext } from "../../providers/TechContext";
 import { CreateTechForm } from "../../components/forms/CreateTechForm";
 import { EditTechForm } from "../../components/forms/EditTechForm";
 
-
 export const HomePage = () => {
   const { user, userLogout } = useContext(RoutineUserContext);
 
-  const { isOpenModalCreateTech, createTech, editingTech } = useContext(RoutineTechContext)
-  
+  const { isOpenModalCreateTech, createTech, editingTech } =
+    useContext(RoutineTechContext);
+
   return (
-    
     <div className={styles.dashFlex}>
-
-      {isOpenModalCreateTech ? 
-        <CreateTechModal > 
+      {isOpenModalCreateTech ? (
+        <CreateTechModal>
           <CreateTechForm />
-        </CreateTechModal> : null}
+        </CreateTechModal>
+      ) : null}
 
-      {editingTech ? 
-        <EditTechModal> 
+      {editingTech ? (
+        <EditTechModal>
           <EditTechForm />
-        </EditTechModal> : null}
+        </EditTechModal>
+      ) : null}
 
       <Header>
-        <button className="btn sm grey" onClick={() => userLogout()}>
+        <button className="btn sm grey" onClick={() => userLogout.mutate()}>
           Sair
         </button>
       </Header>
@@ -48,6 +48,5 @@ export const HomePage = () => {
         </section>
       </main>
     </div>
-
   );
 };

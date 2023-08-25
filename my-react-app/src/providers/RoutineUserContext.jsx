@@ -1,53 +1,55 @@
-import { createContext, useEffect } from "react";
-import { useState } from "react";
+import { createContext } from "react";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const RoutineUserContext = createContext({});
 
 export const RoutineUserProvider = ({ children }) => {
   const navigate = useNavigate();
+  const client = useQueryClient();
 
-  const [user, setUser] = useState(null);
+  const pathname = window.location.pathname;
 
-  useEffect(() => {
-    const loadUser = async () => {
-      const token = localStorage.getItem("@token-KenzieHub");
-
-      if (token) {
-        try {
-          const { data } = await api.get("/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(data);
-          navigate("/dashboard");
-        } catch (error) {
-          localStorage.removeItem("@token-KenzieHub");
-        }
-      }
-    };
-    loadUser();
-  }, []);
-
-  const userLogin = async (formData, reset, setLoading) => {
-    try {
-      setLoading(true);
-      const res = await api.post("/sessions", formData);
-      const token = res.data.token;
-      setUser(res.data.user);
-      localStorage.setItem("@token-KenzieHub", token);
-      toast.success("Login realizado com sucesso!");
-      reset();
-      navigate("/dashboard");
-    } catch (error) {
-      toast.error("O e-mail e a senha não correspondem.");
-    } finally {
-      setLoading(false);
-    }
+  const revalidate = () => {
+    client.invalidateQueries({ queryKey: "userCurrent" });
   };
+
+  const { data: user, isLoading } = useQuery({
+    queryKey: ["userCurrent"],
+    queryFn: async () => {
+      const token = localStorage.getItem("@token-KenzieHub");
+      if (token) {
+        const { data } = await api.get("/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return data;
+      } else return null;
+    },
+    onSuccess: () => {},
+    onError: () => {
+      localStorage.removeItem("@token-KenzieHub");
+    },
+  });
+
+  const userLogin = useMutation({
+    mutationFn: async (loginData) => {
+      const res = await api.post("/sessions", loginData.formData);
+      const token = res.data.token;
+      localStorage.setItem("@token-KenzieHub", token);
+      return res.data.user;
+    },
+    onSuccess: () => {
+      revalidate();
+      toast.success("Login realizado com sucesso!");
+    },
+    onError: () => {
+      toast.error("O e-mail e a senha não correspondem.");
+    },
+  });
 
   const userRegister = async (formData, reset, setLoading) => {
     try {
@@ -65,15 +67,18 @@ export const RoutineUserProvider = ({ children }) => {
     }
   };
 
-  const userLogout = () => {
-    setUser(null);
-    localStorage.removeItem("@token-KenzieHub");
-    navigate("/");
-  };
+  const userLogout = useMutation({
+    mutationFn: () => {
+      user.mutate = null;
+      localStorage.removeItem("@token-KenzieHub");
+      revalidate();
+      toast.success("Usuário deslogado");
+    },
+  });
 
   return (
     <RoutineUserContext.Provider
-      value={{ userLogin, userRegister, user, userLogout }}
+      value={{ userLogin, userRegister, user, userLogout, isLoading }}
     >
       {children}
     </RoutineUserContext.Provider>

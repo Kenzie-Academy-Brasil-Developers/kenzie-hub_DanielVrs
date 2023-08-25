@@ -1,30 +1,30 @@
-.input{
-	background-color: var(--grey-2);
-	padding: 0 1rem; // 16px
-	height: clamp(21px, 3vw, 27px);
-	border-radius: 4px;
-	border: 1.218px  solid transparent;
+.input {
+  background-color: var(--grey-2);
+  padding: 0 1rem; // 16px
+  height: clamp(21px, 3vw, 27px);
+  border-radius: 4px;
+  border: 1.218px solid transparent;
 
-	font-family: var(--font-family-primary);
-	font-size: 0.8125rem; // 13px
-	font-size: clamp(13px, 3vw , 16px);
-	font-weight: 400;
-	color: var(--grey-0);
+  font-family: var(--font-family-primary);
+  font-size: 0.8125rem; // 13px
+  font-size: clamp(13px, 3vw, 16px);
+  font-weight: 400;
+  color: var(--grey-0);
 
-	width: 100%;
+  width: 100%;
 
-	height: clamp(38.5px , 6vw, 48px);
+  height: clamp(38.5px, 6vw, 48px);
 
-	&::placeholder{
-		font-family: var(--font-family-primary);
-		font-size: clamp(13px, 3vw , 16px);
+  &::placeholder {
+    font-family: var(--font-family-primary);
+    font-size: clamp(13px, 3vw, 16px);
 
-		// font-size: 1rem; // 16px
-		font-weight: 400;
-		color: var(--grey-1);
-	}
+    // font-size: 1rem; // 16px
+    font-weight: 400;
+    color: var(--grey-1);
+  }
 
-	&:focus{
-		border-color: var(--grey-0);
-	}
+  &:focus {
+    border-color: var(--grey-0);
+  }
 }
